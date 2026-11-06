@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Framework Performance Ad Copy Studio | 100% Client-Side BYOK Studio</title>
+  <meta name="description" content="Generate high-converting ad copy across 5 proven copywriting frameworks (PAS, AIDA, BAB, Story, Scarcity). Includes real-time Meta and TikTok ad policy compliance linter with zero cloud tracking.">
+  <meta name="keywords" content="ad copy generator, pas framework copy, aida ad maker, before after bridge copy, ad policy checker, meta ad copy, tiktok ad compliance, byok copy studio">
+  <link rel="canonical" href="https://greentools-dev.github.io/byok-ad-copy-spinner/">
+  <meta property="og:title" content="Multi-Framework Performance Ad Copy Studio">
+  <meta property="og:description" content="5 proven copywriting frameworks with real-time ad policy compliance scanning. 100% private in-browser tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://greentools-dev.github.io/byok-ad-copy-spinner/">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .flagged-word {
+      background-color: #fee2e2;
+      color: #991b1b;
+      padding: 0 4px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-decoration: underline wavy #ef4444;
+    }
+  </style>
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Multi-Framework Performance Ad Copy Studio",
+        "url": "https://greentools-dev.github.io/byok-ad-copy-spinner/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "description": "Direct-response ad copy generator producing 5 classic frameworks (PAS, AIDA, BAB, Story, Scarcity) with automated Meta/TikTok advertising policy compliance linting.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are the 5 copywriting frameworks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The studio produces variations across PAS (Problem-Agitate-Solve), AIDA (Attention-Interest-Desire-Action), BAB (Before-After-Bridge), Story Hook, and Scarcity / Limited Offer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the ad policy linter work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The client-side scanner audits text against high-risk words flagged by Meta, TikTok, and Google advertising guidelines (like 'miracle', 'guarantee', 'cure', or 'make money fast') to prevent account bans."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this tool work without an API key?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Click 'Try Demo (No Key)' to load realistic multi-framework copy variations with live policy linting and character counts immediately."
+            }
+          }
+        ]
+      }
+    ]
+  </script>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-slate-800 antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Header -->
+  <header class="border-b border-slate-200/80 bg-white/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm shadow-blue-500/20">
+          <i data-lucide="megaphone" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-slate-900 tracking-tight text-lg">GreenTools<span class="text-blue-600">.dev</span></span>
+          <span class="hidden sm:inline-block ml-2 text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/60">Ad Copy Studio</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- BYOK Key Trigger -->
+        <button type="button" id="btn-open-settings" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition-colors shadow-2xs">
+          <i data-lucide="key" class="w-3.5 h-3.5 text-blue-600"></i>
+          <span id="key-status-label">API Key: Not Set</span>
+        </button>
+        <a href="https://github.com/greentools-dev/byok-ad-copy-spinner" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 transition-colors p-1.5">
+          <i data-lucide="github" class="w-5 h-5"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Error / Alert Banner -->
+  <div id="alert-banner" class="hidden max-w-7xl mx-auto px-4 mt-4">
+    <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs font-medium text-amber-800 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0"></i>
+        <span id="alert-message">Notice message</span>
+      </div>
+      <button type="button" id="btn-close-alert" class="text-amber-600 hover:text-amber-800 p-1">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Hero & Primary Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-8 md:py-10 flex flex-col">
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        Multi-Framework Performance Ad Copy Studio
+      </h1>
+      <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+        Generate 5 proven direct-response angles (PAS, AIDA, BAB, Story Hook, Scarcity) with automated Meta &amp; TikTok policy compliance scanning. Zero cloud logs.
+      </p>
+    </div>
+
+    <!-- Top Generation Input Card -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-8 max-w-4xl mx-auto w-full flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-4 h-4 text-blue-600"></i>
+          Offer &amp; Audience Parameters
+        </span>
+        <button type="button" id="btn-demo-mode" class="text-xs font-semibold text-blue-700 hover:text-blue-800 underline underline-offset-2">
+          Try Demo (No Key)
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div>
+          <label for="input-product" class="block font-semibold text-slate-700 mb-1">Product Offer / Solution Name</label>
+          <input type="text" id="input-product" placeholder="e.g. GreenTools Studio - 30+ In-Browser Web Utilities" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium">
+        </div>
+        <div>
+          <label for="input-audience" class="block font-semibold text-slate-700 mb-1">Target Audience &amp; Core Desire</label>
+          <input type="text" id="input-audience" placeholder="e.g. Solo developers, designers, and creators tired of cloud subscription bloat" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <div>
+        <label for="input-usp" class="block text-xs font-semibold text-slate-700 mb-1">Unique Selling Proposition (USP) or Guarantee</label>
+        <textarea id="input-usp" rows="2" placeholder="e.g. 100% free, runs completely in browser memory with zero data stored on external servers, replaces $50/mo in micro-SaaS subscriptions..." class="w-full p-2.5 text-xs font-sans rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+      </div>
+
+      <div class="pt-2 flex items-center justify-between gap-3 flex-wrap">
+        <span class="text-[11px] text-slate-400">Generates 5 distinct framework variations with automated policy trigger word checks.</span>
+        <button type="button" id="btn-generate-ai" class="py-2.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-xs transition-all shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
+          <i data-lucide="wand-2" class="w-4 h-4"></i>
+          <span id="label-generate">Generate 5 Ad Variations</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Copywriting Showcase -->
+    <div class="max-w-5xl mx-auto w-full flex flex-col gap-6">
+      
+      <!-- Toolbar & Export Actions Header -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 id="copy-title-display" class="text-base sm:text-lg font-bold text-slate-900">GreenTools Studio &bull; Performance Ad Copy Suite</h2>
+          <div class="text-xs text-slate-500 mt-0.5">
+            5 Distinct Direct-Response Copy Frameworks
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <button type="button" id="btn-copy-all" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-colors flex items-center gap-1.5 shadow-sm shadow-blue-600/20">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            <span id="label-copy-all">Copy All 5 Frameworks</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Framework Variations Cards -->
+      <div id="frameworks-container" class="space-y-5">
+        <!-- Dynamically rendered copy cards -->
+      </div>
+
+    </div>
+
+    <!-- Sponsor Slot -->
+    <aside id="sponsor-slot" class="mt-12 p-5 rounded-2xl border border-dashed border-slate-300 bg-white text-center text-xs text-slate-500 max-w-3xl mx-auto shadow-2xs">
+      <span class="font-semibold text-slate-600 uppercase tracking-wider text-[11px] block mb-1">Sponsored</span>
+      Accelerate your paid advertising ROI and A/B ad creative testing with GreenTools Performance Studio.
+    </aside>
+
+    <!-- FAQ & Guide -->
+    <section class="mt-12 bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm max-w-5xl mx-auto w-full">
+      <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+        <i data-lucide="help-circle" class="w-5 h-5 text-blue-600"></i>
+        Copywriting Frameworks Guide &amp; FAQ
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-600">
+        <div>
+          <h3 class="font-semibold text-slate-800 mb-1">What is the PAS framework?</h3>
+          <p class="leading-relaxed">
+            <strong>Problem-Agitate-Solve:</strong> Identifies a specific pain point, agitates the emotional frustration of living with it, and positions your solution as the immediate antidote. It is the highest-converting framework for cold traffic.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-800 mb-1">What words trigger Meta/TikTok ad policy rejections?</h3>
+          <p class="leading-relaxed">
+            Ad platforms penalize exaggerated claims and unrealistic guarantees. Words such as "guarantee", "miracle", "cure", "get rich", "instant fix", and "100% risk free" frequently flag automated moderation bots. Our linter highlights these in red.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-800 mb-1">How does BAB (Before-After-Bridge) convert?</h3>
+          <p class="leading-relaxed">
+            BAB contrasts your customer's current painful status quo ("Before") with an idealized future state ("After"), then presents your offer as the direct vehicle ("Bridge") connecting the two worlds.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-800 mb-1">Is this tool private?</h3>
+          <p class="leading-relaxed">
+            100% private. All copywriting generation, character metrics, and policy linting run strictly in your local browser session with zero remote storage.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BYOK Settings Modal -->
+  <div id="settings-modal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-slate-200 max-w-md w-full p-6 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+          <i data-lucide="key" class="w-4 h-4 text-blue-600"></i>
+          AI Provider &amp; API Key Settings
+        </h3>
+        <button type="button" id="btn-close-settings" class="text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="text-xs text-slate-500 leading-relaxed">
+        Enter your API key. It is saved only in local storage on this computer and used for direct browser-to-API calls.
+      </div>
+
+      <!-- Provider Selector -->
+      <div>
+        <label for="select-provider" class="block text-xs font-semibold text-slate-700 mb-1">AI Provider</label>
+        <select id="select-provider" class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 bg-white font-medium text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500">
+          <option value="gemini" selected>Google Gemini (Recommended &bull; Fast Free Tier)</option>
+          <option value="openai">OpenAI / OpenRouter</option>
+        </select>
+      </div>
+
+      <!-- Model Name -->
+      <div>
+        <label for="input-model" class="block text-xs font-semibold text-slate-700 mb-1">Model Name</label>
+        <input type="text" id="input-model" value="gemini-2.5-flash" class="w-full px-3 py-1.5 text-xs font-mono rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500">
+      </div>
+
+      <!-- Key Input -->
+      <div>
+        <label for="input-api-key" class="block text-xs font-semibold text-slate-700 mb-1">API Key</label>
+        <input type="password" id="input-api-key" placeholder="AIzaSy... or sk-..." class="w-full px-3 py-2 text-xs font-mono rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500">
+      </div>
+
+      <!-- Actions -->
+      <div class="pt-2 flex items-center justify-between gap-2">
+        <button type="button" id="btn-clear-key" class="px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+          Clear Key
+        </button>
+        <div class="flex items-center gap-2">
+          <button type="button" id="btn-cancel-settings" class="px-3.5 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 rounded-lg border border-slate-200 transition-colors">
+            Cancel
+          </button>
+          <button type="button" id="btn-save-settings" class="px-4 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-sm">
+            Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white mt-12 py-8">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-800">GreenTools.dev</span>
+        <span>&bull;</span>
+        <span>100% Client-Side Web Studios</span>
+      </div>
+      <div>
+        Zero Server Storage &bull; Private Local Keys &bull; No Telemetry
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Logic -->
+  <script>
+    lucide.createIcons();
+
+    // High-Risk Ad Policy Trigger Words List
+    const policyFlagList = [
+      'guarantee', 'guaranteed', 'miracle', 'cure', 'make money fast',
+      'get rich', 'passive wealth', '100% free money', 'risk-free', 'risk free',
+      'secret loophole', 'unlimited income', 'financial freedom overnight',
+      'lose weight fast', 'magic pill', 'no work required', 'foolproof'
+    ];
+
+    // Default Demo Copy Variations
+    const defaultVariations = [
+      {
+        framework: "PAS (Problem - Agitate - Solve)",
+        headline: "Tired of Paying $49/mo for Simple Web Tools?",
+        bodyCopy: "Every time you need to crop an avatar, clean a messy CSV, or test audio LUFS, another SaaS demands your credit card. You're bleeding hundreds annually on micro-subscriptions you barely use.\n\nGreenTools gives you 30+ high-utility developer and creator tools running 100% inside your browser memory. Zero cloud bills. Zero logins. Zero tracking.",
+        cta: "Bookmark GreenTools.dev & Save Hundreds Today"
+      },
+      {
+        framework: "AIDA (Attention - Interest - Desire - Action)",
+        headline: "Stop Uploading Confidential Client Files to Cloud Tools",
+        bodyCopy: "Did you know that most online converters upload your raw files to remote third-party servers? If you handle client contracts, bank statements, or private recordings, that's a serious compliance breach.\n\nGreenTools processes your files locally using native browser APIs. Your data never touches a remote database.",
+        cta: "Try 30+ Free In-Browser Tools Now"
+      },
+      {
+        framework: "BAB (Before - After - Bridge)",
+        headline: "The Smarter Way to Handle Digital Assets",
+        bodyCopy: "BEFORE: Juggling 8 different SaaS tabs, creating burner accounts, and paying $15/mo for basic PDF redactions.\n\nAFTER: Opening one clean directory and instantly converting, calculating, and sanitizing files with zero server latency.\n\nTHE BRIDGE: GreenTools.dev — 30+ zero-backend web tools built for creators.",
+        cta: "Explore the Full Suite for Free"
+      },
+      {
+        framework: "Story Hook & Epiphany",
+        headline: "We Killed Our Entire Cloud Infrastructure (Here's Why)",
+        bodyCopy: "Last month, we realized that 90% of our cloud compute bills were going toward tasks that modern browsers can do locally. So we rebuilt all 30 of our internal tools with client-side Web Audio, Canvas, and Web Workers.\n\nThe result? Zero monthly cloud costs and instant response times for our users.",
+        cta: "Check Out the Client-Side Directory"
+      },
+      {
+        framework: "Scarcity & Direct Offer",
+        headline: "Get 30+ Pro Web Utilities for $0 — Lifetime Free Access",
+        bodyCopy: "Skip the recurring subscription fatigue. GreenTools delivers instant audio loudness metering, PDF redaction, SVG conversion, and prompt optimization directly in your browser with zero paywalls.\n\nNo signups. No email gates. Just pure utility.",
+        cta: "Launch GreenTools.dev Now"
+      }
+    ];
+
+    let currentVariations = JSON.parse(JSON.stringify(defaultVariations));
+
+    // DOM Elements
+    const inputProduct = document.getElementById('input-product');
+    const inputAudience = document.getElementById('input-audience');
+    const inputUsp = document.getElementById('input-usp');
+    const btnGenerateAi = document.getElementById('btn-generate-ai');
+    const labelGenerate = document.getElementById('label-generate');
+    const btnDemoMode = document.getElementById('btn-demo-mode');
+
+    const copyTitleDisplay = document.getElementById('copy-title-display');
+    const frameworksContainer = document.getElementById('frameworks-container');
+    const btnCopyAll = document.getElementById('btn-copy-all');
+    const labelCopyAll = document.getElementById('label-copy-all');
+
+    const alertBanner = document.getElementById('alert-banner');
+    const alertMessage = document.getElementById('alert-message');
+    const btnCloseAlert = document.getElementById('btn-close-alert');
+
+    // Settings Modal Elements
+    const btnOpenSettings = document.getElementById('btn-open-settings');
+    const settingsModal = document.getElementById('settings-modal');
+    const btnCloseSettings = document.getElementById('btn-close-settings');
+    const btnCancelSettings = document.getElementById('btn-cancel-settings');
+    const btnSaveSettings = document.getElementById('btn-save-settings');
+    const btnClearKey = document.getElementById('btn-clear-key');
+    const inputApiKey = document.getElementById('input-api-key');
+    const selectProvider = document.getElementById('select-provider');
+    const inputModel = document.getElementById('input-model');
+    const keyStatusLabel = document.getElementById('key-status-label');
+
+    function loadSettings() {
+      const savedKey = localStorage.getItem('byok_api_key') || '';
+      const savedProvider = localStorage.getItem('byok_provider') || 'gemini';
+      const savedModel = localStorage.getItem('byok_model') || (savedProvider === 'gemini' ? 'gemini-2.5-flash' : 'gpt-4o-mini');
+
+      inputApiKey.value = savedKey;
+      selectProvider.value = savedProvider;
+      inputModel.value = savedModel;
+
+      if (savedKey) {
+        keyStatusLabel.textContent = `API Key: Connected (${savedProvider})`;
+        keyStatusLabel.parentElement.classList.replace('text-slate-700', 'text-blue-700');
+        keyStatusLabel.parentElement.classList.add('bg-blue-50', 'border-blue-200');
+      } else {
+        keyStatusLabel.textContent = 'API Key: Not Set';
+      }
+    }
+
+    btnOpenSettings.addEventListener('click', () => settingsModal.classList.remove('hidden'));
+    function closeSettings() { settingsModal.classList.add('hidden'); }
+    btnCloseSettings.addEventListener('click', closeSettings);
+    btnCancelSettings.addEventListener('click', closeSettings);
+
+    btnSaveSettings.addEventListener('click', () => {
+      const key = inputApiKey.value.trim();
+      const prov = selectProvider.value;
+      const model = inputModel.value.trim();
+
+      if (key) {
+        localStorage.setItem('byok_api_key', key);
+        localStorage.setItem('byok_provider', prov);
+        localStorage.setItem('byok_model', model);
+      } else {
+        localStorage.removeItem('byok_api_key');
+      }
+      loadSettings();
+      closeSettings();
+    });
+
+    btnClearKey.addEventListener('click', () => {
+      localStorage.removeItem('byok_api_key');
+      inputApiKey.value = '';
+      loadSettings();
+      closeSettings();
+    });
+
+    function showAlert(msg) {
+      alertMessage.textContent = msg;
+      alertBanner.classList.remove('hidden');
+    }
+    btnCloseAlert.addEventListener('click', () => alertBanner.classList.add('hidden'));
+
+    // Ad Policy Linter Engine
+    function lintText(text) {
+      const lower = text.toLowerCase();
+      const detected = [];
+
+      policyFlagList.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        if (regex.test(lower)) {
+          detected.push(word);
+        }
+      });
+
+      return detected;
+    }
+
+    // Render Copy Framework Cards
+    function renderVariations() {
+      frameworksContainer.innerHTML = '';
+
+      currentVariations.forEach((item, index) => {
+        const fullText = `${item.headline}\n\n${item.bodyCopy}\n\n👉 ${item.cta}`;
+        const flags = lintText(fullText);
+        const wordCount = fullText.trim().split(/\s+/).length;
+        const charCount = fullText.length;
+
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col gap-4 hover:border-blue-300 transition-colors';
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-mono font-bold text-xs">
+                Framework ${index + 1}
+              </span>
+              <span class="font-bold text-slate-900 text-sm">${item.framework}</span>
+            </div>
+
+            <!-- Policy Compliance Status Badge -->
+            <div class="flex items-center gap-2">
+              ${flags.length > 0 ? `
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                  <i data-lucide="alert-triangle" class="w-3 h-3 text-amber-600"></i>
+                  Flagged: "${flags.join(', ')}"
+                </span>
+              ` : `
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  <i data-lucide="check" class="w-3 h-3 text-emerald-600"></i>
+                  Policy Clean
+                </span>
+              `}
+            </div>
+          </div>
+
+          <!-- Headline -->
+          <div>
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Headline</div>
+            <h3 class="text-base font-extrabold text-slate-900 leading-snug">${item.headline}</h3>
+          </div>
+
+          <!-- Body Copy -->
+          <div>
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Body Copy</div>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 leading-relaxed font-sans whitespace-pre-wrap">${item.bodyCopy}</div>
+          </div>
+
+          <!-- Call to Action -->
+          <div>
+            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Call to Action (CTA)</div>
+            <div class="font-bold text-blue-700 text-xs flex items-center gap-1.5">
+              <span>👉 ${item.cta}</span>
+            </div>
+          </div>
+
+          <!-- Card Footer Metrics & Copy Button -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-mono">
+            <span>${wordCount} words &bull; ${charCount} chars</span>
+            <button type="button" class="btn-copy-card px-3.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 font-sans font-bold text-xs transition-colors flex items-center gap-1.5 shadow-2xs" data-index="${index}">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span>Copy Ad</span>
+            </button>
+          </div>
+        `;
+
+        frameworksContainer.appendChild(card);
+      });
+
+      // Individual Copy Buttons
+      document.querySelectorAll('.btn-copy-card').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const idx = parseInt(btn.dataset.index, 10);
+          const item = currentVariations[idx];
+          const text = `${item.headline}\n\n${item.bodyCopy}\n\n👉 ${item.cta}`;
+          await navigator.clipboard.writeText(text);
+
+          const label = btn.querySelector('span');
+          label.textContent = 'Copied!';
+          btn.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-300');
+          setTimeout(() => {
+            label.textContent = 'Copy Ad';
+            btn.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-300');
+          }, 1500);
+        });
+      });
+
+      lucide.createIcons();
+    }
+
+    // Demo Mode Loader
+    btnDemoMode.addEventListener('click', () => {
+      currentVariations = JSON.parse(JSON.stringify(defaultVariations));
+      copyTitleDisplay.textContent = "GreenTools Studio • Performance Ad Copy Suite";
+      renderVariations();
+      showAlert('Loaded 5-framework direct response ad copy demo!');
+    });
+
+    // Copy All Variations
+    btnCopyAll.addEventListener('click', async () => {
+      let fullBundle = `=== GREENTOOLS AD COPY PERFORMANCE BUNDLE ===\n\n`;
+      currentVariations.forEach((item, idx) => {
+        fullBundle += `--- ${item.framework.toUpperCase()} ---\nHEADLINE: ${item.headline}\n\nBODY:\n${item.bodyCopy}\n\nCTA: 👉 ${item.cta}\n\n\n`;
+      });
+
+      await navigator.clipboard.writeText(fullBundle);
+      labelCopyAll.textContent = 'All 5 Copied!';
+      btnCopyAll.classList.replace('bg-blue-600', 'bg-blue-700');
+      setTimeout(() => {
+        labelCopyAll.textContent = 'Copy All 5 Frameworks';
+        btnCopyAll.classList.replace('bg-blue-700', 'bg-blue-600');
+      }, 2000);
+    });
+
+    // AI Generation via Direct In-Browser Fetch (BYOK)
+    btnGenerateAi.addEventListener('click', async () => {
+      const product = inputProduct.value.trim();
+      const audience = inputAudience.value.trim();
+      const usp = inputUsp.value.trim();
+
+      if (!product || !audience) {
+        showAlert('Please enter both product name and target audience.');
+        return;
+      }
+
+      const apiKey = localStorage.getItem('byok_api_key');
+      if (!apiKey) {
+        showAlert('No API Key detected. Please click "API Key: Not Set" to enter your key, or use "Try Demo" to preview.');
+        settingsModal.classList.remove('hidden');
+        return;
+      }
+
+      const provider = localStorage.getItem('byok_provider') || 'gemini';
+      const model = localStorage.getItem('byok_model') || (provider === 'gemini' ? 'gemini-2.5-flash' : 'gpt-4o-mini');
+
+      labelGenerate.textContent = 'Generating 5 Copy Angles...';
+      btnGenerateAi.disabled = true;
+
+      const systemPrompt = `You are a world-class direct-response copywriter for Meta and TikTok performance ads.
+Generate 5 distinct ad copy variations for:
+Product: "${product}"
+Audience: "${audience}"
+USP / Offer: "${usp || 'High performance and exceptional quality'}"
+
+Generate variations for these 5 exact frameworks:
+1. "PAS (Problem - Agitate - Solve)"
+2. "AIDA (Attention - Interest - Desire - Action)"
+3. "BAB (Before - After - Bridge)"
+4. "Story Hook & Epiphany"
+5. "Scarcity & Direct Offer"
+
+Avoid banned trigger words (e.g. miracle, guarantee, cure, get rich fast).
+Return ONLY a valid JSON array of 5 objects matching this exact schema:
+[
+  {
+    "framework": "Framework Name",
+    "headline": "Scroll-stopping headline (max 9 words)",
+    "bodyCopy": "Compelling 2-3 paragraph body copy",
+    "cta": "Direct action call to action"
+  }
+]
+Return zero extra text outside the JSON.`;
+
+      try {
+        let jsonResponseText = '';
+
+        if (provider === 'gemini') {
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: systemPrompt }] }],
+              generationConfig: { responseMimeType: 'application/json' }
+            })
+          });
+
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error?.message || `Gemini returned status ${res.status}`);
+          }
+
+          const data = await res.json();
+          jsonResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        } else {
+          const url = `https://api.openai.com/v1/chat/completions`;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: [{ role: 'user', content: systemPrompt }],
+              response_format: { type: 'json_object' }
+            })
+          });
+
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error?.message || `OpenAI returned status ${res.status}`);
+          }
+
+          const data = await res.json();
+          jsonResponseText = data.choices?.[0]?.message?.content;
+        }
+
+        let parsed = JSON.parse(jsonResponseText);
+        if (!Array.isArray(parsed) && parsed.variations) parsed = parsed.variations;
+
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          currentVariations = parsed;
+          copyTitleDisplay.textContent = `${product} • Performance Ad Copy Suite`;
+          renderVariations();
+          showAlert(`Successfully generated ${parsed.length} ad frameworks with ${model}!`);
+        } else {
+          throw new Error('AI returned an unexpected array structure.');
+        }
+
+      } catch (err) {
+        console.error(err);
+        showAlert(`Generation failed: ${err.message}`);
+      } finally {
+        labelGenerate.textContent = 'Generate 5 Ad Variations';
+        btnGenerateAi.disabled = false;
+      }
+    });
+
+    // Initialization
+    loadSettings();
+    renderVariations();
+  </script>
+</body>
+</html>
